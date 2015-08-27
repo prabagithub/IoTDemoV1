@@ -31,7 +31,7 @@
 	var plan=$('#planType').find('option:selected').attr('value').split("~");
 	$.ajax({
 		type : 'GET',
-		url : 'http://localhost:9090/WS-V1/rest/userProvision',
+		url : 'http://iotapp.cfapps.io/rest/userProvision',
 		data : {
 			userId : $('#p_userId').val(),
 			planId : plan[0],
@@ -49,7 +49,7 @@
 			alert("check");
 			$.ajax({
 				type : 'GET',
-				url : 'http://localhost:9090/WS-V1/rest/gadget',
+				url : 'http://iotapp.cfapps.io/rest/gadget',
 				data : {
 	                userId : $('#userId1').val(),
 					location : $('#location').val(), 
@@ -66,7 +66,7 @@
 			$("#billDetail tbody").empty();
 			$.ajax({
 				type : 'GET',
-				url : 'http://localhost:9090/WS-V1/rest/currentBill',
+				url : 'http://iotapp.cfapps.io/rest/currentBill',
 				data : {
 	                userId : $('#userId1').val()
 	            },
@@ -83,7 +83,7 @@
 			if(PlanVal=="undefined")
 				{
 				$("#planDetails tbody").empty();
-				}elser{
+				}else{
 					var plan=$(this).find('option:selected').attr('value').split("~");
 					
 					$("#planDetails tbody").empty();
@@ -103,7 +103,7 @@
 		
 		$.ajax({
 			type : 'GET',
-			url : 'http://localhost:9090/WS-V1/rest/planDetails',
+			url : 'http://iotapp.cfapps.io/rest/planDetails',
 			contentType : 'application/json; charset=utf-8',
 			dataType : 'json',
 			success : getPlanTypeSuccess,
