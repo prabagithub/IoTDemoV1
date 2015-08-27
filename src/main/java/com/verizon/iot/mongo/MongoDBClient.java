@@ -1,5 +1,6 @@
 package com.verizon.iot.mongo;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +35,8 @@ public class MongoDBClient {
 
 	static {
 		try {
+			buildRateMap();
+			buildPlans();
 			initDBConnection();
 		} catch (Exception e) {
 			throw new ExceptionInInitializerError("DB connection not created");
@@ -54,7 +57,7 @@ public class MongoDBClient {
 		 //updateBillData(1234, "HealthDevices", 3.00, 3.24);
 		 //fetchCurrentBillData(1234);
 		 //fetchCurrentUsageDetails(1234, "HealthDevices");
-		 fetchPlanDetails();
+		 //fetchPlanDetails();
 
 	}
 
@@ -88,6 +91,7 @@ public class MongoDBClient {
 			docg.put("health", 10.00);
 			docg.put("appliance", 20.00);
 			docg.put("other", 30.00);
+			docg.put("PlanCharges", 19.99);
 			
 			doc.put("details", docg);
 			collection.insertOne(doc);
@@ -100,6 +104,7 @@ public class MongoDBClient {
 			docg1.put("health", 20.00);
 			docg1.put("appliance", 30.00);
 			docg1.put("other", 40.00);
+			docg1.put("PlanCharges", 29.99);
 			
 			doc1.put("details", docg1);
 			collection.insertOne(doc1);
@@ -112,6 +117,7 @@ public class MongoDBClient {
 			docg2.put("health", 30.00);
 			docg2.put("appliance", 40.00);
 			docg2.put("other", 50.00);
+			docg2.put("PlanCharges", 49.99);
 			
 			doc2.put("details", docg2);
 			collection.insertOne(doc2);
@@ -176,39 +182,44 @@ public class MongoDBClient {
 	}
 	
 	public static JsonArray fetchPlanDetails(){		
-		
 		MongoCursor<Document> cursor = null;
-		JsonObject j = null;
-		JsonArray ja = null;
+		JsonArray jarray = null;
 		
 		try{
-			MongoCollection<Document> collection = mongoDatabase.getCollection(VZIOT_PLAN_MASTER_DB);
-			//BasicDBObject dbo = new BasicDBObject("planId", planId);
-			
 			Document planDoc = null;
+			MongoCollection<Document> collection = mongoDatabase.getCollection(VZIOT_PLAN_MASTER_DB);
+							
 			FindIterable<Document> iter = collection.find();
 			cursor = iter.iterator();			
-			System.out.println("Fetching document for plan details:");
-			
-			
-			
 			JsonArrayBuilder jab = Json.createArrayBuilder();
-			
 			while(cursor.hasNext()){
 				JsonObjectBuilder job = Json.createObjectBuilder();
 				planDoc = cursor.next();	
 				job.add("planId", planDoc.get("planId").toString());
-				job.add("details", planDoc.get("details").toString());
+				//job.add("details", planDoc.get("details").toString());
 				
-				System.out.println("plaId = " + planDoc.get("planId").toString());
-				System.out.println("details = " + planDoc.get("details").toString());			
-			
-				JsonObject jj = job.build();
-				jab.add(jj);
-				System.out.println(jj);
+				if(((Document)planDoc.get("details")).get("Gadgets") != null)
+				job.add("Gadgets", String.valueOf(((Document)planDoc.get("details")).get("Gadgets")));
+				else
+					job.add("Gadgets", "0.0");
+				if(((Document)planDoc.get("details")).get("Appliances") != null)
+					job.add("Appliances", String.valueOf(((Document)planDoc.get("details")).get("Appliances")));
+					else
+						job.add("Appliances", "0.0");
+				if(((Document)planDoc.get("details")).get("Others") != null)
+					job.add("Others", String.valueOf(((Document)planDoc.get("details")).get("Others")));
+					else
+						job.add("Others", "0.0");
+				if(((Document)planDoc.get("details")).get("HealthDevices") != null)
+					job.add("HealthDevices", String.valueOf(((Document)planDoc.get("details")).get("HealthDevices")));
+					else
+						job.add("HealthDevices", "0.0");
+
+				JsonObject jo = job.build();
+				jab.add(jo);
 			}
 			
-			ja = jab.build();			
+			jarray = jab.build();			
 		} catch(Exception e){
 			e.printStackTrace();
 		} finally {
@@ -218,7 +229,7 @@ public class MongoDBClient {
 		//System.out.println("ja= " + ja);
 		
 		
-		return ja;
+		return jarray;
 	}
 
 	
@@ -372,6 +383,8 @@ public class MongoDBClient {
 		UpdateOptions uo = new UpdateOptions();
 		uo.upsert(true);
 		
+		DecimalFormat df=new DecimalFormat(".##");
+		totAmount = Double.parseDouble(df.format(totAmount));
 		collection.updateOne(
 				new Document("userId", userId).append("deviceCategory",deviceCategory),
 				new Document("$set", new Document("currentBillAmt", totAmount).append("dataVolume",totData)),

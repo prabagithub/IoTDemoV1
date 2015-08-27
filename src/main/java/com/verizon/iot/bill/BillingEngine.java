@@ -8,9 +8,16 @@ import com.verizon.iot.mongo.MongoDBClient;;
 public class BillingEngine {
 
 	public static final double calculateBill(int userId, String deviceCategory, double incomingDataVolume){
+		double currCharges = 0.00;
 		String planId = MongoDBClient.fetchUserPlanId(userId);
 		Document planDoc = MongoDBClient.fetchPlanDetails(planId);
+		double pc =((Document)planDoc.get("details")).getDouble("PlanCharges");
 		Document userUsageDoc = MongoDBClient.fetchCurrentUsageDetails(userId, deviceCategory);
+		
+		if(userUsageDoc == null){
+			currCharges = pc;
+			return currCharges;
+		}
 		
 		Double currentlyUsedDataVolume = userUsageDoc.getDouble("dataVolume");
 		double dvtemp = currentlyUsedDataVolume + incomingDataVolume;
@@ -18,12 +25,12 @@ public class BillingEngine {
 				
 		Double rateForTheDevice = MongoDBClient.getRateMap().get(deviceCategory);
 		
-		double currCharges = 0.00;
+		double planThreshold = ((Document)planDoc.get("details")).getDouble(deviceCategory);
 		
-		if ( currentlyUsedDataVolume >= planDoc.getDouble(deviceCategory)){
+		if ( currentlyUsedDataVolume >= planThreshold){
 			dvToCharge = incomingDataVolume;
-		}else if(dvtemp >= planDoc.getDouble(deviceCategory)){
-			dvToCharge = dvtemp - planDoc.getDouble(deviceCategory);
+		}else if(dvtemp >= planThreshold){
+			dvToCharge = dvtemp - planThreshold;
 		}
 		
 		if(rateForTheDevice != null){

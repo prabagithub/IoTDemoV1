@@ -2,6 +2,7 @@ package com.verizon.iot.ws;
 
 
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -16,10 +17,11 @@ public class PlanDetailsWS  {
 	@GET
 	// @Consumes("text/plain")
 	@Produces(MediaType.TEXT_HTML)
-	public String persistGadgetRequestG() {
-
-			 
+	public String fetchCurrentBillAmount() {
 		
-		return "Congratulations! You have been provisioned: For Plan Id = ";// + planId;
+		JsonArray jarry = MongoDBClient.fetchPlanDetails();
+		
+		return jarry.toString();
+		
 	}
 }
