@@ -35,6 +35,8 @@ public class MongoDBClient {
 
 	static {
 		try {
+			System.out.println("Init pizza");
+			initDBConnection();
 			System.out.println("This Works");
 			buildRateMap();
 			buildPlans();
@@ -46,7 +48,7 @@ public class MongoDBClient {
 			fetchCurrentBillData(1234);
 			fetchCurrentUsageDetails(1234, "HealthDevices");
 			fetchPlanDetails();
-		initDBConnection();
+		
 		} catch (Exception e) {
 			throw new ExceptionInInitializerError("DB connection not created");
 		}
@@ -79,7 +81,7 @@ public class MongoDBClient {
 
 	private static void initDBConnection() throws Exception {
 		try {
-			mongoClient = new MongoClient("localhost", 27017);
+			mongoClient = new MongoClient("ds035633.mongolab.com", 35633);
 			mongoDatabase = mongoClient.getDatabase("test");
 			System.out.println("Connect to database successfully");
 		} catch (Exception e) {
