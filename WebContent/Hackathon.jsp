@@ -13,7 +13,7 @@
 <script src="jquery-1.11.3.js"></script>
 
 
-<title>Hackathon</title>
+<title>Simplify IoT</title>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
 
@@ -162,7 +162,7 @@
 </script>
 </head>
 <body>
-	<p id="header">Hackathon Testing</p>
+	<p id="header">Simplify IoT: Data Logistics and Billing</p>
 
 	<table align="center">
 		<tr>
@@ -221,8 +221,16 @@
 						</tr>
 						<tr>
 							<td>Data Category</td>
-							<td><input type="text" name="deviceCategory"
-								id="deviceCategory"></td>
+							<td>
+							<select id="deviceCategory">
+							  <option value="HealthDevices">HealthDevices</option>
+							  <option value="Gadgets">Gadgets</option>
+							  <option value="Appliances">Appliances</option>
+							  <option value="Others">Others</option>
+							</select>
+							</td>
+							<!-- <td><input type="text" name="deviceCategory" id="deviceCategory"></td> -->
+							
 						</tr>
 						<tr>
 							<td>Data Volume</td>
