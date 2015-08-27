@@ -1,0 +1,53 @@
+p{
+	color: red;
+	text-align: center;
+	font-size: 15px;
+}
+#header {
+	color: #FFF;
+	background: #900;
+	font-weight: lighter;
+	font-size: 20px;
+	border: 1px solid #900;
+	border: 1px double #FC6;
+	border-top-color: #FC9;
+	border-left-color: #FC9;
+}
+
+#lGrid{
+	line-height:30px;
+	background-color:#eeeeee;
+	height:300px;
+	width:100px;
+	float:cen;
+	padding:5px;
+	right:centre;
+}
+
+
+.theader {
+	
+	font-weight: bold;
+	font-size: 11px;
+	line-height:25px;
+	color:black;
+	text-align:center;
+	background-color:#585858;
+	color:white;
+}
+
+.trow
+{
+	font-weight: normal;
+	font-size: 13px;
+}
+
+#billDetail{
+	vertical-align: top;
+	
+}
+
+.tdata
+{
+	vertical-align: top;
+}

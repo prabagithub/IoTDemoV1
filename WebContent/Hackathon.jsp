@@ -41,7 +41,7 @@
 				success : OnGetMemberSuccess,
 				error : OnGetMemberError
 			});
-			
+		});
 		$('#show_bill').click(function(e) {
 			$("#billDetail tbody").empty();
 			$.ajax({
@@ -77,6 +77,7 @@
 	}
 
 	function clearOnSave() {
+		alert("Test");
 		$("#userId").val("");
 		$("#location").val("");
 		$("#deviceCategory").val("");
