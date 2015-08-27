@@ -22,7 +22,8 @@ public class BillingEngine {
 		Double currentlyUsedDataVolume = userUsageDoc.getDouble("dataVolume");
 		double dvtemp = currentlyUsedDataVolume + incomingDataVolume;
 		Double dvToCharge = 0.00;
-				
+	
+		System.out.println("currentlyUsedDataVolume="+ currentlyUsedDataVolume);
 		Double rateForTheDevice = MongoDBClient.getRateMap().get(deviceCategory);
 		
 		double planThreshold = ((Document)planDoc.get("details")).getDouble(deviceCategory);

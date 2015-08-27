@@ -5,5 +5,4 @@ applications:
   path: build/deploy/iotApp.war
   
   services:
-    - mongodb-service  
-  
+    - mongodb-service
