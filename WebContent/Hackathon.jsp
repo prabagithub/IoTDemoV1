@@ -47,9 +47,19 @@
 		$('#save').click(function(e) {
 			$("#billDetail tbody").empty();
 			
+			var url;
+			var dCategory=$('#deviceCategory').val();
+			if(dCategory=="HealthDevices")
+				url="http://iotapp.cfapps.io/rest/health";
+			else if(dCategory=="Gadgets")
+				url="http://iotapp.cfapps.io/rest/gadget";
+			else if(dCategory=="Appliances")
+				url="http://iotapp.cfapps.io/rest/appliance";
+			else if(dCategory=="Others")
+				url="http://iotapp.cfapps.io/rest/other";
 			$.ajax({
 				type : 'GET',
-				url : 'http://iotapp.cfapps.io/rest/gadget',
+				url : url,
 				data : {
 	                userId : $('#userId1').val(),
 					location : $('#location').val(), 

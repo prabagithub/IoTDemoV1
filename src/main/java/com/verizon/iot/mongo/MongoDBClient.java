@@ -150,7 +150,7 @@ public class MongoDBClient {
 
 
 
-	public static Document fetchCurrentUsageDetails(int userId, String deviceCategory){
+	public static Document fetchCurrentUsageDetails(long userId, String deviceCategory){
 		MongoCursor<Document> cursor = null;
 		Document userUsageDoc = null;
 		try{
@@ -252,7 +252,7 @@ public class MongoDBClient {
 	}
 
 	
-	public static String fetchUserPlanId(int userId){
+	public static String fetchUserPlanId(long userId){
 		MongoCursor<Document> cursor = null;
 		Document planDoc = null;
 		try{
@@ -276,7 +276,7 @@ public class MongoDBClient {
 		return planDoc.getString("planId");
 	}
 	
-	public static void provisionUser(int userId, String planId){
+	public static void provisionUser(long userId, String planId){
 		try{
 			MongoCollection<Document> collection = mongoDatabase.getCollection(VZIOT_USER_PROFILE_DB);
 			System.out.println("User provisioned in DB successfully");
@@ -293,7 +293,7 @@ public class MongoDBClient {
 		}
 	}
 	
-	public static void insertIntoDataDumpTable(int userId, String location, String deviceCategory, double dataVolume){
+	public static void insertIntoDataDumpTable(long userId, String location, String deviceCategory, double dataVolume){
 		try{
 			MongoCollection<Document> collection = mongoDatabase.getCollection(VZIOT_DATA_DUMP_DB);
 			
@@ -318,7 +318,7 @@ public class MongoDBClient {
 	 * @param paramValue
 	 * @return
 	 */
-	public static String fetchCurrentBillData(int userId) {
+	public static String fetchCurrentBillData(long userId) {
 		System.out.println("Fetching Document :" + userId);
 		MongoCursor<Document> cursor = null;
 		JsonArray jarry = Json.createArrayBuilder().build();
@@ -364,7 +364,7 @@ public class MongoDBClient {
 	}
 	
 	
-	public static void updateBillData(int userId, String deviceCategory, double dataVolume, double currentBillAmount){
+	public static void updateBillData(long userId, String deviceCategory, double dataVolume, double currentBillAmount){
 		MongoCollection<Document> collection = mongoDatabase.getCollection(VZIOT_BILLING_DB);
 		BasicDBObject dbo = new BasicDBObject("userId", userId).append("deviceCategory",deviceCategory);
 		FindIterable<Document> iter = collection.find(dbo);

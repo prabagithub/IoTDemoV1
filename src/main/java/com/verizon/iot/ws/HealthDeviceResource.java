@@ -12,8 +12,8 @@ import javax.ws.rs.core.MediaType;
 import com.verizon.iot.bill.BillingEngine;
 import com.verizon.iot.mongo.MongoDBClient;
 
-@Path("gadget")
-public class GadgetResource {
+@Path("health")
+public class HealthDeviceResource {
 	@GET
 	// @Consumes("text/plain")
 	@Produces(MediaType.TEXT_HTML)

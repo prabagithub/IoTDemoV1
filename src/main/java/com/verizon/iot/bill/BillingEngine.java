@@ -7,7 +7,7 @@ import com.verizon.iot.mongo.MongoDBClient;;
 
 public class BillingEngine {
 
-	public static final double calculateBill(int userId, String deviceCategory, double incomingDataVolume){
+	public static final double calculateBill(long userId, String deviceCategory, double incomingDataVolume){
 		double currCharges = 0.00;
 		String planId = MongoDBClient.fetchUserPlanId(userId);
 		Document planDoc = MongoDBClient.fetchPlanDetails(planId);

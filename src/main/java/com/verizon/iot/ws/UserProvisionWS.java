@@ -15,7 +15,7 @@ public class UserProvisionWS  {
 	@GET
 	// @Consumes("text/plain")
 	@Produces(MediaType.TEXT_HTML)
-	public String persistGadgetRequestG(@QueryParam("userId") int userId, @QueryParam("planId") String planId) {
+	public String persistGadgetRequestG(@QueryParam("userId") long userId, @QueryParam("planId") String planId) {
 
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		job.add("userId", userId);

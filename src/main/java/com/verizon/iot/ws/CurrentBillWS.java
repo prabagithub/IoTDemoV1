@@ -15,7 +15,7 @@ public class CurrentBillWS {
 	@GET
 	// @Consumes("text/plain")
 	@Produces(MediaType.TEXT_HTML)
-	public String fetchCurrentBillAmount(@QueryParam("userId") int userId) {
+	public String fetchCurrentBillAmount(@QueryParam("userId") long userId) {
 		System.out.println("Fetch Current Bill for UserId = " + userId);
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		job.add("userId", userId);
