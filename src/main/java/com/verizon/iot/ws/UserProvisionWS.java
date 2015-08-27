@@ -23,6 +23,6 @@ public class UserProvisionWS  {
 		
 		MongoDBClient.provisionUser(userId, planId); 
 		
-		return "Congratulations! You have been provisioned: For Plan Id = " + planId;
+		return "Congratulations "+userId+"! You have been provisioned: For Plan Id = " + planId;
 	}
 }

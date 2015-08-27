@@ -38,6 +38,10 @@ public class MongoDBClient {
 		try {
 			System.out.println("Init pizza");
 			initDBConnection();
+			dropCollection(VZIOT_DATA_DUMP_DB);
+			dropCollection(VZIOT_BILLING_DB);
+			dropCollection(VZIOT_PLAN_MASTER_DB);
+			dropCollection(VZIOT_USER_PROFILE_DB);
 			System.out.println("This Works");
 			buildRateMap();
 			buildPlans();
@@ -103,9 +107,9 @@ public class MongoDBClient {
 			
 			Document docg = new Document();
 			docg.put("Gadgets", 5.00);
-			docg.put("health", 10.00);
-			docg.put("appliance", 20.00);
-			docg.put("other", 30.00);
+			docg.put("HealthDevices", 10.00);
+			docg.put("Appliances", 20.00);
+			docg.put("Others", 30.00);
 			docg.put("PlanCharges", 19.99);
 			
 			doc.put("details", docg);
@@ -116,9 +120,9 @@ public class MongoDBClient {
 			
 			Document docg1 = new Document();
 			docg1.put("Gadgets", 10.00);
-			docg1.put("health", 20.00);
-			docg1.put("appliance", 30.00);
-			docg1.put("other", 40.00);
+			docg1.put("HealthDevices", 20.00);
+			docg1.put("Appliances", 30.00);
+			docg1.put("Others", 40.00);
 			docg1.put("PlanCharges", 29.99);
 			
 			doc1.put("details", docg1);
@@ -129,9 +133,9 @@ public class MongoDBClient {
 			
 			Document docg2 = new Document();
 			docg2.put("Gadgets", 20.00);
-			docg2.put("health", 30.00);
-			docg2.put("appliance", 40.00);
-			docg2.put("other", 50.00);
+			docg2.put("HealthDevices", 30.00);
+			docg2.put("Appliances", 40.00);
+			docg2.put("Others", 50.00);
 			docg2.put("PlanCharges", 49.99);
 			
 			doc2.put("details", docg2);
@@ -407,6 +411,12 @@ public class MongoDBClient {
 				);	
 		System.out.println("Updated to database successfully");
 			
+	}
+	
+	private static void dropCollection(String collectionName){
+		MongoCollection<Document> collection = mongoDatabase.getCollection(collectionName);
+		collection.drop();
+		
 	}
 	
 }

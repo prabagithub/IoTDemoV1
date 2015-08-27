@@ -27,7 +27,7 @@
 		
 		$('#user_prov_save').click(function(e)
 				
-	{alert("save");
+	{
 	var plan=$('#planType').find('option:selected').attr('value').split("~");
 	$.ajax({
 		type : 'GET',
@@ -46,7 +46,7 @@
 	
 		$('#save').click(function(e) {
 			$("#billDetail tbody").empty();
-			alert("check");
+			
 			$.ajax({
 				type : 'GET',
 				url : 'http://iotapp.cfapps.io/rest/gadget',
@@ -137,7 +137,7 @@
 		
 		
 	function OnGetMemberSuccess(data, status) {
-		alert("sucess");
+		
 		$.each(data, function(i, obj) {
 			$("#billDetail tbody").append(
 					"<tr class=\"trow\">" + "<td>" + obj.deviceCategory
