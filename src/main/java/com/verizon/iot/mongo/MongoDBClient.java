@@ -86,7 +86,7 @@ public class MongoDBClient {
 			//MongoClientURI uu = new MongoClientURI("ds035713.mongolab.com:35713/CloudFoundry_rt2ng8pk_5bfinaug");			
 			mongoClient = new MongoClient(uu);
 			//mongoClient = new MongoClient("ds035633.mongolab.com", 35633);
-			mongoDatabase = mongoClient.getDatabase("test");
+			mongoDatabase = mongoClient.getDatabase("CloudFoundry_rt2ng8pk_tin9mr48");
 			System.out.println("Connect to database successfully");
 		} catch (Exception e) {
 			e.printStackTrace();
