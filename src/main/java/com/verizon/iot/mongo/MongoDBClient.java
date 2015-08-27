@@ -15,6 +15,7 @@ import org.bson.Document;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -81,7 +82,10 @@ public class MongoDBClient {
 
 	private static void initDBConnection() throws Exception {
 		try {
-			mongoClient = new MongoClient("ds035633.mongolab.com", 35633);
+			MongoClientURI uu = new MongoClientURI("ds035633.mongolab.com:35633/CloudFoundry_rt2ng8pk_tin9mr48");
+			//MongoClientURI uu = new MongoClientURI("ds035713.mongolab.com:35713/CloudFoundry_rt2ng8pk_5bfinaug");			
+			mongoClient = new MongoClient(uu);
+			//mongoClient = new MongoClient("ds035633.mongolab.com", 35633);
 			mongoDatabase = mongoClient.getDatabase("test");
 			System.out.println("Connect to database successfully");
 		} catch (Exception e) {
