@@ -9,4 +9,4 @@ deploy:
    password: temppassword1
    api: https://api.run.pivotal.io
    organization: vinod-org
-   space: staging
+   space: development
