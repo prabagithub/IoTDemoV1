@@ -2,3 +2,11 @@ language: java
 sudo: required
 script:
   ant
+deploy:
+   edge: true
+   provider: cloudfoundry
+   username: vinod91@gmail.com
+   password: temppassword1
+   api: https://api.run.pivotal.io
+   organization: vinod-org
+   space: staging
