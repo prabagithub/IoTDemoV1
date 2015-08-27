@@ -35,9 +35,18 @@ public class MongoDBClient {
 
 	static {
 		try {
+			System.out.println("This Works");
 			buildRateMap();
 			buildPlans();
-			initDBConnection();
+			provisionUser(1234,"SMALL");
+			insertIntoDataDumpTable(1234, "ny", "HealthDevices", 12.00);
+			fetchUserPlanId(1234);			
+			fetchPlanDetails("SMALL");
+			updateBillData(1234, "HealthDevices", 3.00, 3.24);
+			fetchCurrentBillData(1234);
+			fetchCurrentUsageDetails(1234, "HealthDevices");
+			fetchPlanDetails();
+		initDBConnection();
 		} catch (Exception e) {
 			throw new ExceptionInInitializerError("DB connection not created");
 		}
