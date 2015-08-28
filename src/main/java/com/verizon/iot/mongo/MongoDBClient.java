@@ -238,6 +238,10 @@ public class MongoDBClient {
 					job.add("PlanCharges", String.valueOf(((Document)planDoc.get("details")).get("PlanCharges")));
 					else
 						job.add("PlanCharges", "0.0");
+				job.add("Gadgets_Rate", RATE_MAP.get("Gadgets"));
+				job.add("Appliances_Rate", RATE_MAP.get("Appliances"));
+				job.add("HealthDevices_Rate", RATE_MAP.get("HealthDevices"));
+				job.add("Others_Rate", RATE_MAP.get("Others"));
 				
 				JsonObject jo = job.build();
 				jab.add(jo);

@@ -88,13 +88,13 @@
 					$("#planDetails tbody").empty();
 					$("#planDetails tbody").append(
 						"<tr class=\"trow\">" + "<td>HealthDevices"
-						+ "</td>" + "<td>" + plan[1] + "</td></tr>"+
+						+ "</td>" + "<td>" + plan[1] + "</td>"+ "<td>" + plan[5] + "</td></tr>"+
 						"<tr class=\"trow\">" + "<td>Gadgets"
-						+ "</td>"+ "<td>" + plan[2] + "</td></tr>"+
+						+ "</td>"+ "<td>" + plan[2] + "</td>"+ "<td>" + plan[6] + "</td></tr>"+
 						"<tr class=\"trow\">" + "<td>Appliances"
-						+ "</td>" + "<td>" + plan[3] + "</td></tr>"+
+						+ "</td>" + "<td>" + plan[3] + "</td>"+ "<td>" + plan[7] + "</td></tr>"+
 						"<tr class=\"trow\">" + "<td>Others"
-						+ "</td>"+ "<td>" + plan[4] + "</td></tr>"+
+						+ "</td>"+ "<td>" + plan[4] + "</td>"+ "<td>" + plan[8] + "</td></tr>"+
 						"<tr class=\"trow\">" + "<td>PlanCharges"
 						+ "</td>"+ "<td>" + plan[5] + "</td></tr>"
 					);
@@ -119,7 +119,8 @@
 		mySelect.append($('<option></option>').val("undefined").html(""));
 		$.each(data, function(val, text){
 			mySelect.append(
-					$('<option></option>').val(text.planId+"~"+text.HealthDevices+"~"+text.Gadgets+"~"+text.Appliances+"~"+text.Others+"~"+text.PlanCharges).html(text.planId));
+					$('<option></option>').val(text.planId+"~"+text.HealthDevices+"~"+text.Gadgets+"~"+text.Appliances+"~"+text.Others+"~"+text.PlanCharges+"~"+text.HealthDevices_Rate
+							+"~"+text.Gadgets_Rate+"~"+text.Appliances_Rate+"~"+text.Others_Rate).html(text.planId));
 			
 		});
 	}
@@ -193,6 +194,16 @@
 			
 			<td>
 				<table border="1" id="planDetails">
+				<thead class="theader">
+				<tr>
+					<th colspan="3" align="center">Plan Details</th>
+				</tr>
+						<tr>
+							<th>Device Category</th>
+							<th>Data Limit (MB)</th>
+							<th>Overage Charge</th>
+							</tr>
+							</thead>
 				<tbody>
 				
 				</tbody>
