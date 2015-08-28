@@ -115,7 +115,7 @@
 			
 			<batchtest fork="yes" todir="${PROJECT_BUILD_HOME}/reports/xml">
 				<fileset dir="${PROJECT_SOURCE_HOME}/test/java">
-					<include name="**/MyTest.java"/>
+					<include name="**/*Test.java"/>
 				</fileset>
 			</batchtest>			
 		</junit>
