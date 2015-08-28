@@ -36,12 +36,10 @@ public class BillingEngine {
 
 	protected static double calculate(Document planDoc, Document userUsageDoc, String deviceCategory, double incomingDataVolume) {
 		double currCharges = 0.00;
-		
-		if (userUsageDoc == null) {
-			return currCharges;
+		Double currentlyUsedDataVolume = 0.00;
+		if (userUsageDoc != null) {
+			currentlyUsedDataVolume = userUsageDoc.getDouble("dataVolume");
 		}
-
-		Double currentlyUsedDataVolume = userUsageDoc.getDouble("dataVolume");
 		double dvtemp = currentlyUsedDataVolume + incomingDataVolume;
 		Double dvToCharge = 0.00;
 
