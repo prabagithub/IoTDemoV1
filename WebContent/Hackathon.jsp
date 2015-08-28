@@ -45,26 +45,15 @@
 	});
 	
 		$('#save').click(function(e) {
-			$("#billDetail tbody").empty();
-			
-			/* var urls;
-			var dCategory=$('#deviceCategory').val();
-			if(dCategory=="HealthDevices")
-				urls="http://iotapp.cfapps.io/rest/health";
-			else if(dCategory=="Gadgets")
-				urls="http://iotapp.cfapps.io/rest/gadget";
-			else if(dCategory=="Appliances")
-				urls="http://iotapp.cfapps.io/rest/appliance";
-			else if(dCategory=="Others")
-				urls="http://iotapp.cfapps.io/rest/other"; */
+			$("#billDetail tbody").empty();		
 			$.ajax({
 				type : 'GET',
 				url : 'http://iotapp.cfapps.io/rest/gadget',
 				data : {
-	                userId : $('#userId1').val(),
-					location : $('#location').val(), 
-					deviceCategory : $('#deviceCategory').val(),
-					dataVolume : $('#dataVolume').val(),
+	                userId : $('#userIdMock').val(),
+					location : $('#locationMock').val(), 
+					deviceCategory : $('#deviceCategoryMock').val(),
+					dataVolume : $('#dataVolumeMock').val(),
 	            },
 				contentType : 'application/json; charset=utf-8',
 				dataType : 'json',
@@ -166,10 +155,10 @@
 	}
 
 	function clearOnSave() {
-		$("#userId").val("");
-		$("#location").val("");
-		$("#deviceCategory").val("");
-		$("#dataVolume").val("");
+		$("#userIdMock").val("");
+		$("#locationMock").val("");
+		$("#deviceCategoryMock").val("");
+		$("#dataVolumeMock").val("");
 	}
 </script>
 </head>
@@ -225,16 +214,16 @@
 
 						<tr>
 							<td>User Id</td>
-							<td><input type="text" name="userId" id="userId"></td>
+							<td><input type="text" name="userId" id="userIdMock"></td>
 						</tr>
 						<tr>
 							<td>Location</td>
-							<td><input type="text" name="location" id="location"></td>
+							<td><input type="text" name="location" id="locationMock"></td>
 						</tr>
 						<tr>
 							<td>Data Category</td>
 							<td>
-							<select id="deviceCategory">
+							<select id="deviceCategoryMock">
 							  <option value="HealthDevices">HealthDevices</option>
 							  <option value="Gadgets">Gadgets</option>
 							  <option value="Appliances">Appliances</option>
@@ -246,7 +235,7 @@
 						</tr>
 						<tr>
 							<td>Data Volume</td>
-							<td><input type="text" name="dataVolume" id="dataVolume"></td>
+							<td><input type="text" name="dataVolume" id="dataVolumeMock"></td>
 						</tr>
 						<tr>
 							<td align="right"><input type="button" value="Save" id="save"></td>
