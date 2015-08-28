@@ -234,6 +234,11 @@ public class MongoDBClient {
 					else
 						job.add("HealthDevices", "0.0");
 
+				if(((Document)planDoc.get("details")).get("PlanCharges") != null)
+					job.add("PlanCharges", String.valueOf(((Document)planDoc.get("details")).get("PlanCharges")));
+					else
+						job.add("PlanCharges", "0.0");
+				
 				JsonObject jo = job.build();
 				jab.add(jo);
 			}

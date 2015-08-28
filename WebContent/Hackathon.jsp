@@ -47,19 +47,19 @@
 		$('#save').click(function(e) {
 			$("#billDetail tbody").empty();
 			
-			var url;
+			var urls;
 			var dCategory=$('#deviceCategory').val();
 			if(dCategory=="HealthDevices")
-				url="http://iotapp.cfapps.io/rest/health";
+				urls="http://iotapp.cfapps.io/rest/health";
 			else if(dCategory=="Gadgets")
-				url="http://iotapp.cfapps.io/rest/gadget";
+				urls="http://iotapp.cfapps.io/rest/gadget";
 			else if(dCategory=="Appliances")
-				url="http://iotapp.cfapps.io/rest/appliance";
+				urls="http://iotapp.cfapps.io/rest/appliance";
 			else if(dCategory=="Others")
-				url="http://iotapp.cfapps.io/rest/other";
+				urls="http://iotapp.cfapps.io/rest/other";
 			$.ajax({
 				type : 'GET',
-				url : url,
+				url : urls,
 				data : {
 	                userId : $('#userId1').val(),
 					location : $('#location').val(), 
@@ -105,7 +105,9 @@
 						"<tr class=\"trow\">" + "<td>Appliances"
 						+ "</td>" + "<td>" + plan[3] + "</td></tr>"+
 						"<tr class=\"trow\">" + "<td>Others"
-						+ "</td>"+ "<td>" + plan[4] + "</td></tr>"
+						+ "</td>"+ "<td>" + plan[4] + "</td></tr>"+
+						"<tr class=\"trow\">" + "<td>PlanCharges"
+						+ "</td>"+ "<td>" + plan[5] + "</td></tr>"
 					);
 				}
 		
@@ -128,7 +130,7 @@
 		mySelect.append($('<option></option>').val("undefined").html(""));
 		$.each(data, function(val, text){
 			mySelect.append(
-					$('<option></option>').val(text.planId+"~"+text.HealthDevices+"~"+text.Gadgets+"~"+text.Appliances+"~"+text.Others).html(text.planId));
+					$('<option></option>').val(text.planId+"~"+text.HealthDevices+"~"+text.Gadgets+"~"+text.Appliances+"~"+text.Others+"~"+text.PlanCharges).html(text.planId));
 			
 		});
 	}
