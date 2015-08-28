@@ -45,7 +45,8 @@ public class BillingEngine {
 
 		Double rateForTheDevice = MongoDBClient.getRateMap().get(deviceCategory);
 
-		double planThreshold = ((Document) planDoc.get("details")).getDouble(deviceCategory);
+		double planThreshold = 0;
+		planThreshold=((Document) planDoc.get("details")).getDouble(deviceCategory);
 
 		if (currentlyUsedDataVolume >= planThreshold) {
 			dvToCharge = incomingDataVolume;

@@ -260,6 +260,7 @@ public class MongoDBClient {
 	public static String fetchUserPlanId(long userId){
 		MongoCursor<Document> cursor = null;
 		Document planDoc = null;
+		String planID=null;
 		try{
 			MongoCollection<Document> collection = mongoDatabase.getCollection(VZIOT_USER_PROFILE_DB);
 			BasicDBObject dbo = new BasicDBObject("userId", userId);
@@ -270,6 +271,7 @@ public class MongoDBClient {
 			while(cursor.hasNext()){
 				planDoc = cursor.next();
 				System.out.println("Plan Row Data = "+ planDoc);
+				planID=planDoc.getString("planId");
 				break;
 			}
 			
@@ -278,7 +280,7 @@ public class MongoDBClient {
 		} finally {
 			cursor.close();
 		}
-		return planDoc.getString("planId");
+		return planID;
 	}
 	
 	public static void provisionUser(long userId, String planId){
