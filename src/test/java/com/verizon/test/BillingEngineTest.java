@@ -58,5 +58,16 @@ public class BillingEngineTest {
 			assertTrue(false);			
 		}
 	}
+	
+	@Test
+	public void testSmallUser3() {
+		double currCharges = BillingEngine.calculateBill(1236, "Gadgets", 150);
+		
+		System.out.println("currCharges = " + currCharges);
+		
+		if(currCharges == 0){
+			assertTrue(false);			
+		}
+	}
 
 }
