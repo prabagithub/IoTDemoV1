@@ -14,6 +14,19 @@
 <include name="*.jar" />
 </fileset>
 </path>
+	
+	<path id="compile.classpath.test">
+	  <fileset dir="${PROJECT_BUILD_HOME}/jar">
+	<include name="*.jar" />
+	</fileset>
+	</path>
+	
+	<path id="compile.classpath.test.junit">
+	  <fileset dir="${PROJECT_HOME}/WebContent/WEB-INF/lib">
+	<include name="junit-.11.jar" />
+	</fileset>
+	</path>
+	
 
 <!-- ==================== JCID BUILD Clean up Starts====================== -->
 
@@ -80,7 +93,11 @@
 	 <javac srcdir="${PROJECT_SOURCE_HOME}/" destdir="${PROJECT_BUILD_HOME}/test/classes" debug="true">
 
 	  <classpath refid="compile.classpath" />
-	  <include name="**/*Test.java" /> 
+	 	<classpath refid="compile.classpath.test" />
+	  	<classpath refid="compile.classpath.test.junit" />
+	  <include name="**/MyTest.java" />
+	 	<include name="**/BillingEngineTest.java" />
+	 	
 	  </javac>
 	  </target>
 	
@@ -93,10 +110,12 @@
 				<pathelement location="${PROJECT_BUILD_HOME}/jar"/>
 			</classpath>
 			<classpath refid = "compile.classpath"/>
+			<classpath refid="compile.classpath.test" />
+			<classpath refid="compile.classpath.test.junit" />
 			
 			<batchtest fork="yes" todir="${PROJECT_BUILD_HOME}/reports/xml">
 				<fileset dir="${PROJECT_SOURCE_HOME}/test/java">
-					<include name="**/*Test.java"/>
+					<include name="**/MyTest.java"/>
 				</fileset>
 			</batchtest>			
 		</junit>
