@@ -11,11 +11,10 @@ public class BillingEngine {
 		double currCharges = 0.00;
 		String planId = MongoDBClient.fetchUserPlanId(userId);
 		Document planDoc = MongoDBClient.fetchPlanDetails(planId);
-		double pc =((Document)planDoc.get("details")).getDouble("PlanCharges");
 		Document userUsageDoc = MongoDBClient.fetchCurrentUsageDetails(userId, deviceCategory);
 		
 		if(userUsageDoc == null){
-			currCharges = pc;
+			currCharges=0.00;
 			return currCharges;
 		}
 		
