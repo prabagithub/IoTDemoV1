@@ -88,13 +88,13 @@
 					$("#planDetails tbody").empty();
 					$("#planDetails tbody").append(
 						"<tr class=\"trow\">" + "<td>HealthDevices"
-						+ "</td>" + "<td>" + plan[1] + "</td>"+ "<td>" + plan[5] + "</td></tr>"+
+						+ "</td>" + "<td>" + plan[1] + "</td>"+ "<td>" + plan[6] + "</td></tr>"+
 						"<tr class=\"trow\">" + "<td>Gadgets"
-						+ "</td>"+ "<td>" + plan[2] + "</td>"+ "<td>" + plan[6] + "</td></tr>"+
+						+ "</td>"+ "<td>" + plan[2] + "</td>"+ "<td>" + plan[7] + "</td></tr>"+
 						"<tr class=\"trow\">" + "<td>Appliances"
-						+ "</td>" + "<td>" + plan[3] + "</td>"+ "<td>" + plan[7] + "</td></tr>"+
+						+ "</td>" + "<td>" + plan[3] + "</td>"+ "<td>" + plan[8] + "</td></tr>"+
 						"<tr class=\"trow\">" + "<td>Others"
-						+ "</td>"+ "<td>" + plan[4] + "</td>"+ "<td>" + plan[8] + "</td></tr>"+
+						+ "</td>"+ "<td>" + plan[4] + "</td>"+ "<td>" + plan[9] + "</td></tr>"+
 						"<tr class=\"trow\">" + "<td>PlanCharges"
 						+ "</td>"+ "<td>" + plan[5] + "</td></tr>"
 					);
@@ -168,7 +168,7 @@
 
 	<table align="center">
 		<tr>
-			<td>
+			<td class="tdata">
 				<table border="1">
 						<thead class="theader">
 							<tr>
@@ -192,7 +192,7 @@
 				</table>
 			</td>
 			
-			<td>
+			<td class="tdata">
 				<table border="1" id="planDetails">
 				<thead class="theader">
 				<tr>
