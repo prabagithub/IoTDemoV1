@@ -4,40 +4,65 @@ import org.bson.Document;
 
 import com.verizon.iot.mongo.MongoDBClient;;
 
-
 public class BillingEngine {
 
-	public static final double calculateBill(long userId, String deviceCategory, double incomingDataVolume){
-		double currCharges = 0.00;
-		String planId = MongoDBClient.fetchUserPlanId(userId);
-		Document planDoc = MongoDBClient.fetchPlanDetails(planId);
-		Document userUsageDoc = MongoDBClient.fetchCurrentUsageDetails(userId, deviceCategory);
+	public static final double calculateBill(long userId, String deviceCategory, double incomingDataVolume) {
 		
-		if(userUsageDoc == null){
-			currCharges=0.00;
+		String planId = getPlanId(userId);
+		Document planDoc = getPlanDetails(planId);
+		Document userUsageDoc = getCurrentUsageDetails(userId, deviceCategory);
+
+		return calculate(planDoc, userUsageDoc, deviceCategory, incomingDataVolume);
+	}
+
+	private static String getPlanId(long userId) {
+
+		String planId = MongoDBClient.fetchUserPlanId(userId);
+		return planId;
+
+	}
+
+	private static Document getPlanDetails(String planId) {
+		Document planDoc = MongoDBClient.fetchPlanDetails(planId);
+		return planDoc;
+
+	}
+
+	private static Document getCurrentUsageDetails(long userId, String deviceCategory) {
+		Document userUsageDoc = MongoDBClient.fetchCurrentUsageDetails(userId, deviceCategory);
+		return userUsageDoc;
+
+	}
+
+	protected static double calculate(Document planDoc, Document userUsageDoc, String deviceCategory, double incomingDataVolume) {
+		double currCharges = 0.00;
+		
+		if (userUsageDoc == null) {
 			return currCharges;
 		}
-		
+
 		Double currentlyUsedDataVolume = userUsageDoc.getDouble("dataVolume");
 		double dvtemp = currentlyUsedDataVolume + incomingDataVolume;
 		Double dvToCharge = 0.00;
-	
-		System.out.println("currentlyUsedDataVolume="+ currentlyUsedDataVolume);
+
 		Double rateForTheDevice = MongoDBClient.getRateMap().get(deviceCategory);
-		
-		double planThreshold = ((Document)planDoc.get("details")).getDouble(deviceCategory);
-		
-		if ( currentlyUsedDataVolume >= planThreshold){
+
+		double planThreshold = ((Document) planDoc.get("details")).getDouble(deviceCategory);
+
+		if (currentlyUsedDataVolume >= planThreshold) {
 			dvToCharge = incomingDataVolume;
-		}else if(dvtemp >= planThreshold){
+		} else if (dvtemp >= planThreshold) {
 			dvToCharge = dvtemp - planThreshold;
 		}
-		
-		if(rateForTheDevice != null){
+
+		if (rateForTheDevice != null) {
 			currCharges = dvToCharge * rateForTheDevice;
-		}else {
+		} else {
 			currCharges = dvToCharge * MongoDBClient.getRateMap().get("Others");
 		}
+		
+		
 		return currCharges;
+
 	}
 }

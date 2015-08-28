@@ -331,6 +331,12 @@ public class MongoDBClient {
 		JsonArrayBuilder jab = Json.createArrayBuilder();
 
 		try {
+			String planId = MongoDBClient.fetchUserPlanId(userId);
+			Document planDoc = MongoDBClient.fetchPlanDetails(planId);
+			
+			double pc = ((Document)planDoc.get("details")).getDouble("PlanCharges");
+			
+			
 			MongoCollection<Document> collection = mongoDatabase.getCollection(VZIOT_BILLING_DB);
 			BasicDBObject dbo = new BasicDBObject("userId", userId);
 			FindIterable<Document> iter = collection.find(dbo);
@@ -339,14 +345,17 @@ public class MongoDBClient {
 			String deviceCategory = null;
 			double dataVolume = 0.00;
 			double currentBillAmt = 0.00;
-
+			
+			double currentBillSum = 0.00;
+			JsonObjectBuilder job = null;
 			while (cursor.hasNext()) {
 				Document docx = cursor.next();
 				deviceCategory = (String) docx.get("deviceCategory");
 				dataVolume = (Double) docx.get("dataVolume");
 				currentBillAmt = (Double) docx.get("currentBillAmt");
-
-				JsonObjectBuilder job = Json.createObjectBuilder();
+				
+				currentBillSum += (double)docx.getDouble("currentBillAmt");
+				job = Json.createObjectBuilder();
 				job.add("userId", userId);
 				job.add("deviceCategory", deviceCategory);
 				job.add("dataVolume", dataVolume);
@@ -355,6 +364,22 @@ public class MongoDBClient {
 				jab.add(job);
 
 			}
+			job = Json.createObjectBuilder();
+			job.add("userId", userId);
+			job.add("deviceCategory", "PlanCharges");
+			job.add("dataVolume", "");
+			job.add("currentBillAmt", pc);
+
+			jab.add(job);
+			
+			currentBillSum+=pc;
+			job = Json.createObjectBuilder();
+			job.add("userId", userId);
+			job.add("deviceCategory", "TotalBill");
+			job.add("dataVolume", "");
+			job.add("currentBillAmt", currentBillSum);
+
+			jab.add(job);
 
 			jarry = jab.build();
 
