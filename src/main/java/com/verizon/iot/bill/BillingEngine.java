@@ -34,7 +34,7 @@ public class BillingEngine {
 
 	}
 
-	protected static double calculate(Document planDoc, Document userUsageDoc, String deviceCategory, double incomingDataVolume) {
+	public static double calculate(Document planDoc, Document userUsageDoc, String deviceCategory, double incomingDataVolume) {
 		double currCharges = 0.00;
 		Double currentlyUsedDataVolume = 0.00;
 		if (userUsageDoc != null) {
