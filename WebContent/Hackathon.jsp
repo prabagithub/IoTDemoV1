@@ -138,7 +138,7 @@
 		
 		
 	function OnGetMemberSuccess(data, status) {
-		
+		clearOnSave();
 		$.each(data, function(i, obj) {
 			$("#billDetail tbody").append(
 					"<tr class=\"trow\">" + "<td>" + obj.deviceCategory
