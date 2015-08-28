@@ -47,7 +47,7 @@
 		$('#save').click(function(e) {
 			$("#billDetail tbody").empty();
 			
-			var urls;
+			/* var urls;
 			var dCategory=$('#deviceCategory').val();
 			if(dCategory=="HealthDevices")
 				urls="http://iotapp.cfapps.io/rest/health";
@@ -56,10 +56,10 @@
 			else if(dCategory=="Appliances")
 				urls="http://iotapp.cfapps.io/rest/appliance";
 			else if(dCategory=="Others")
-				urls="http://iotapp.cfapps.io/rest/other";
+				urls="http://iotapp.cfapps.io/rest/other"; */
 			$.ajax({
 				type : 'GET',
-				url : urls,
+				url : 'http://iotapp.cfapps.io/rest/gadget',
 				data : {
 	                userId : $('#userId1').val(),
 					location : $('#location').val(), 
