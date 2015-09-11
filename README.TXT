@@ -18,4 +18,3 @@
 	9. Observe your Bill Details appear in the Current Bill Details Table
 
 ##Testing edits on file##
-##Testing edits on file##
