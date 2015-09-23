@@ -2,7 +2,7 @@
 
 # Connect to "http://iotapp.cfapps.io" via Chrome Browser
 
-# User Provisioning:
+# User Provisioning::
 	1. Provide Your Mobile Number; Select a PLAN; Click "Submit" Button
 	2. See a browser Pop-Up - Displays - Congratulations Message
 
