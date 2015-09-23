@@ -5,8 +5,8 @@ script:
 deploy:
    edge: true
    provider: cloudfoundry
-   username: vinod91@gmail.com
-   password: temppassword1
+   username: prabamsec@gmail.com
+   password: praba1krishna
    api: https://api.run.pivotal.io
-   organization: vinod-org
+   organization: praba-org
    space: development
